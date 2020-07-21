@@ -17,21 +17,28 @@
 #     return True
 
 
-def open(box, keys):
-    return box in keys
-
-
 def canUnlockAll(boxes):
     keys = boxes[0]
-    n = len(boxes) - 1
-    i = rec_canUnlockAll(boxes, keys, n, 1)
-    return i == n
-
-
-def rec_canUnlockAll(boxes, keys, n, i):
-    if open(i, keys):
-        if i != n:
+    pending = []
+    # keys_used = 0
+    for i in range(1,len(boxes)):
+        if i in keys:
+            # d = dict.fromkeys(keys)
+            # keys = list(d.keys())
+            # keys.remove(i)
+            # keys_used += 1
             for key in boxes[i]:
                 keys.append(key)
-            i = rec_canUnlockAll(boxes, keys, n, i + 1)
-    return i
+        else:
+            pending.append(i)
+    for i in pending:
+        if i in keys:
+            # d = dict.fromkeys(keys)
+            # keys = list(d.keys())
+            # keys.remove(i)
+            # keys_used += 1
+            for key in boxes[i]:
+                keys.append(key)
+        else:
+            return False
+    return True # keys_used == len(boxes)
