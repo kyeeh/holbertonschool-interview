@@ -32,13 +32,27 @@ listint_t *insert_node(listint_t **head, int number)
 		new_node->n = number;
 		if (*head)
 		{
-			tmp_node = get_node_rec(*head, number);
-			if (tmp_node)
-			{
-                new_node->next = tmp_node->next;
-				tmp_node->next = new_node;
-				return (new_node);
-			}
+			if (number <= (*head)->n)
+            {
+				new_node->next = *head;
+                *head = new_node;
+                return (new_node);
+            }
+            if ((*head)->next)
+            {
+                tmp_node = get_node_rec(*head, number);
+                if (tmp_node)
+                {
+                    new_node->next = tmp_node->next;
+                    tmp_node->next = new_node;
+                    return (new_node);
+                }
+            }
+            else
+            {
+				(*head)->next = new_node;
+                return (new_node);
+            }
 		}
 	}
 	return (NULL);
