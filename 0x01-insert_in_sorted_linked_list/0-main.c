@@ -25,7 +25,10 @@ int main(void)
 
     printf("-----------------\n");
 
-    insert_node(&head, 27);
+    insert_node(&head, 0);
+    insert_node(&head, 5);
+    insert_node(&head, 405);
+    insert_node(&head, 1405);
 
     print_listint(head);
 

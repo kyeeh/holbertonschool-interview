@@ -10,8 +10,16 @@ listint_t *get_node_rec(listint_t *head, int n)
 {
 	if (head)
 	{
-		if (n > (head)->n && n <= (head)->next->n)
-			return (head);
+		if (n > (head)->n)
+        {
+            if ((head)->next)
+            {
+			    if (n <= (head)->next->n)
+                    return (head);
+            }
+            else
+                return (head);
+        }
 		head = get_node_rec(head->next, n);
 	}
 	return (head);
