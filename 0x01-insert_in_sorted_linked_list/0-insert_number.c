@@ -46,19 +46,11 @@ listint_t *insert_node(listint_t **head, int number)
                 *head = new_node;
                 return (new_node);
             }
-            if ((*head)->next)
+            tmp_node = get_node_rec(*head, number);
+            if (tmp_node)
             {
-                tmp_node = get_node_rec(*head, number);
-                if (tmp_node)
-                {
-                    new_node->next = tmp_node->next;
-                    tmp_node->next = new_node;
-                    return (new_node);
-                }
-            }
-            else
-            {
-				(*head)->next = new_node;
+                new_node->next = tmp_node->next;
+                tmp_node->next = new_node;
                 return (new_node);
             }
 		}
