@@ -8,20 +8,8 @@
  */
 listint_t *get_node_rec(listint_t *head, int n)
 {
-	if (head)
-	{
-		if (n > (head)->n)
-        {
-            if ((head)->next)
-            {
-			    if (n <= (head)->next->n)
-                    return (head);
-            }
-            else
-                return (head);
-        }
-		head = get_node_rec(head->next, n);
-	}
+	if ((head)->next && (head)->next->n < n)
+        head = get_node_rec(head->next, n);
 	return (head);
 }
 /**
@@ -40,12 +28,6 @@ listint_t *insert_node(listint_t **head, int number)
 	{
 		if (new_node)
 		{
-			if (number <= (*head)->n)
-            {
-				new_node->next = *head;
-                *head = new_node;
-                return (new_node);
-            }
             tmp_node = get_node_rec(*head, number);
             if (tmp_node)
             {
