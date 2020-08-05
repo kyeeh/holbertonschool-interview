@@ -11,30 +11,30 @@ heap_t *heap_insert(heap_t **root, int value)
 	heap_t *node = NULL;
 	int aux;
 
-    if (root)
-    {
-        if (*root)
-        {
-            node = last_node(*root, value);
-            if (node)
-            {
-                while (node->parent && node->parent->n < node->n)
-                {
-                    aux = node->n;
-                    node->n = node->parent->n;
-                    node->parent->n = aux;
-                    node = node->parent;
-                }
-                return (node);
-            }
-        }
-        else
-        {
-            *root = binary_tree_node(NULL, value);
-		    return (*root);
-        }
-    }
-    return (NULL);
+	if (root)
+	{
+		if (*root)
+		{
+			node = last_node(*root, value);
+			if (node)
+			{
+				while (node->parent && node->parent->n < node->n)
+				{
+					aux = node->n;
+					node->n = node->parent->n;
+					node->parent->n = aux;
+					node = node->parent;
+				}
+				return (node);
+			}
+		}
+		else
+		{
+			*root = binary_tree_node(NULL, value);
+			return (*root);
+		}
+	}
+	return (NULL);
 }
 
 /**
@@ -48,15 +48,15 @@ queue *push(queue *last, heap_t *node)
 {
 	queue *q = malloc(sizeof(queue));
 
-    if (q)
-    {
-        q->node = node;
-        q->next = NULL;
-        if (last)
-            last->next =  q;
-        return (q);
-    }
-    return (NULL);
+	if (q)
+	{
+		q->node = node;
+		q->next = NULL;
+		if (last)
+			last->next =  q;
+		return (q);
+	}
+	return (NULL);
 }
 
 /**
@@ -72,51 +72,51 @@ heap_t *last_node(heap_t *root, int value)
 	heap_t *node = NULL;
 
 	q = push(NULL, root);
-    if (q)
-    {
-        last = q;
-        while (q)
-        {
-            if (node)
-            {
-                tmp = q;
-                q = q->next;
-                free(tmp);
-            }
-            else if (q->node->left && q->node->right)
-            {
-                last = push(last, q->node->left);
-                if (last)
-                {
-                    last = push(last, q->node->right);
-                    if (last)
-                    {
-                        tmp = q;
-                        q = q->next;
-                        free(tmp);
-                    }
-                    else
-                    {
-                        return (NULL);
-                    }
-                }
-                else
-                {
-                    return (NULL);
-                }
-            }
-            else if (!q->node->left)
-            {
-                node = binary_tree_node(q->node, value);
-                q->node->left = node;
-            }
-            else
-            {
-                node = binary_tree_node(q->node, value);
-                q->node->right = node;
-            }
-        }
-        return (node);
-    }
-    return (NULL);
+	if (q)
+	{
+		last = q;
+		while (q)
+		{
+			if (node)
+			{
+				tmp = q;
+				q = q->next;
+				free(tmp);
+			}
+			else if (q->node->left && q->node->right)
+			{
+				last = push(last, q->node->left);
+				if (last)
+				{
+					last = push(last, q->node->right);
+					if (last)
+					{
+						tmp = q;
+						q = q->next;
+						free(tmp);
+					}
+					else
+					{
+						return (NULL);
+					}
+				}
+				else
+				{
+					return (NULL);
+				}
+			}
+			else if (!q->node->left)
+			{
+				node = binary_tree_node(q->node, value);
+				q->node->left = node;
+			}
+			else
+			{
+				node = binary_tree_node(q->node, value);
+				q->node->right = node;
+			}
+		}
+		return (node);
+	}
+	return (NULL);
 }
