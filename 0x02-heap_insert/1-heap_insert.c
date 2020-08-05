@@ -73,7 +73,6 @@ queue *update(queue *q)
 	return (q);
 }
 
-
 /**
   *last_node - inserts node on the last position of a heap
   *@root: pointer to the root node of the heap
