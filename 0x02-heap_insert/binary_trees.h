@@ -41,5 +41,6 @@ typedef struct queue_s
 } queue;
 
 queue *push(queue *last, heap_t *node);
+queue *update(queue *q);
 
 #endif /* _BINARY_TREES_H_ */

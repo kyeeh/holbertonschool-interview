@@ -43,7 +43,6 @@ heap_t *heap_insert(heap_t **root, int value)
   *@node: to insert
   *Return: a pointer to the inserted node, or NULL on failure
 */
-
 queue *push(queue *last, heap_t *node)
 {
 	queue *q = malloc(sizeof(queue));
@@ -60,15 +59,30 @@ queue *push(queue *last, heap_t *node)
 }
 
 /**
+  *update - queue pointers
+  *@q: queue
+  *Return: a pointer to the queue
+*/
+queue *update(queue *q)
+{
+	queue *tmp;
+
+	tmp = q;
+	q = q->next;
+	free(tmp);
+	return (q);
+}
+
+
+/**
   *last_node - inserts node on the last position of a heap
   *@root: pointer to the root node of the heap
   *@value: value stored in the node to be inserted
   *Return: a pointer to the inserted node, or NULL on failure
 */
-
 heap_t *last_node(heap_t *root, int value)
 {
-	queue *q, *last, *tmp;
+	queue *q, *last;
 	heap_t *node = NULL;
 
 	q = push(NULL, root);
@@ -78,11 +92,7 @@ heap_t *last_node(heap_t *root, int value)
 		while (q)
 		{
 			if (node)
-			{
-				tmp = q;
-				q = q->next;
-				free(tmp);
-			}
+				q = update(q);
 			else if (q->node->left && q->node->right)
 			{
 				last = push(last, q->node->left);
@@ -90,20 +100,12 @@ heap_t *last_node(heap_t *root, int value)
 				{
 					last = push(last, q->node->right);
 					if (last)
-					{
-						tmp = q;
-						q = q->next;
-						free(tmp);
-					}
+						q = update(q);
 					else
-					{
 						return (NULL);
-					}
 				}
 				else
-				{
 					return (NULL);
-				}
 			}
 			else if (!q->node->left)
 			{
