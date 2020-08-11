@@ -21,15 +21,16 @@ Number of operations: 6
 
 
 def minOperations(n):
-    opps = 2
-    text = 'H'
-    copy = text[:]
-    text += copy
-    if n % 2 == 1:
-        text += copy
-        opps += 1
-        n -= n
-    else:
+    opps, text = 0, 'H'
+    if n == 1:
+        opps = 1
+    if n > 1:
+        if n % 2 == 1:
+            for i in [3, 5, 7]:
+                if n % i == 0:
+                    copy = text[:]
+                    text += (i - 1) * copy
+                    opps = i
         while len(text) != n:
             if n % len(text) == 0:
                 copy = text[:]
