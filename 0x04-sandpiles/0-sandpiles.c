@@ -8,7 +8,6 @@
 void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 {
 	int i, j, unstable = 0;
-	// int grid_aux[3][3];
 
 	for (i = 0; i < 3; i++)
 	{
