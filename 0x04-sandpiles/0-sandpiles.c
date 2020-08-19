@@ -67,7 +67,7 @@ void sandrop(int grid1[3][3], int grid2[3][3])
 				if (j > 0)
 					grid2[i][j - 1] += 1;
 				if (j < 2)
-					grid1[i][j + 1] += 1;
+					grid2[i][j + 1] += 1;
 			}
 		}
 	}
