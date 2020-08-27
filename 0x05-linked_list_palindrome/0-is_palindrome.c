@@ -49,5 +49,8 @@ int is_palindrome(listint_t **head)
 	}
 	else
 		pal = 0;
+	free_listint(node);
+	free_listint(temp);
+	free_listint(auxl);
 	return (pal);
 }
