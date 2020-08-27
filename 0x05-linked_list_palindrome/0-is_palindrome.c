@@ -33,7 +33,7 @@ int reverse_list(listint_t *head, listint_t **auxl)
  */
 int is_palindrome(listint_t **head)
 {
-	int pal = 0;
+	int pal = 1;
 
 	if (head && *head)
 		pal = reverse_list(*head, head);
