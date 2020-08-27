@@ -7,15 +7,23 @@
  * reverse_list - adds a new node at the end of a listint_t list
  * @head: pointer to pointer of first node of listint_t list
  * @auxl: pointer to pointer of first node of listint_t list
- * Return: void
+ * Return: 0 if it is not a palindrome, 1 if it is a palindrome
  */
-void reverse_list(listint_t *head, listint_t **auxl)
+int reverse_list(listint_t *head, listint_t **auxl)
 {
+	int pal;
+
 	if (head)
 	{
-		reverse_list(head->next, auxl);
-		add_nodeint_end(auxl, (head)->n);
+		pal = reverse_list(head->next, auxl);
+		if (pal == 0)
+			return (pal);
+		pal = (head->n == (*auxl)->n);
+		*auxl = (*auxl)->next;
+		return (pal);
 	}
+	else
+		return (1);
 }
 
 /**
@@ -25,32 +33,9 @@ void reverse_list(listint_t *head, listint_t **auxl)
  */
 int is_palindrome(listint_t **head)
 {
-	int pal = 1;
-	listint_t *node, *temp, *auxl = NULL;
+	int pal;
 
-	if (head)
-	{
-		if (*head)
-		{
-			reverse_list(*head, &auxl);
-			node = *head;
-			temp = auxl;
-			while (node != NULL)
-			{
-				if (node->n == temp->n)
-				{
-					node = node->next;
-					temp = temp->next;
-				}
-				else
-					return (0);
-			}
-		}
-	}
-	else
-		pal = 0;
-	free_listint(node);
-	free_listint(temp);
-	free_listint(auxl);
+	if (head && *head)
+		pal = reverse_list(*head, head);
 	return (pal);
 }
