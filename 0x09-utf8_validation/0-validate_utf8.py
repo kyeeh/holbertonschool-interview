@@ -20,20 +20,21 @@ def validUTF8(data):
 
     Returns: True if data is a valid UTF-8 encoding, else return False
     """
-    bin_data = []
+    bytes_counter = 0
+
     for n in data:
-        if type(n) is not int:
-            return False
-        bin_data.append("{:08b}".format(n))
-    for byte in bin_data:
-        if int(byte[0]) == 1:
-            bytes_counter = byte.count('1')
+        byte = format(n, '#010b')[-8:]
+        if bytes_counter == 0:
+            if int(byte[0]) == 1:
+                bytes_counter = byte.count('1')
+            if bytes_counter == 0:
+                continue
             if bytes_counter == 1 or bytes_counter > 4:
                 return False
-            for header in range(bytes_counter - 1):
-                byte = next(bin_data, "NULL")
-                if byte == "NULL":
-                    return False
-                if byte[:2] != ['10']:
-                    return False
-    return True
+        else:
+            if byte[:2] != ['10']:
+                return False
+        bytes_counter -= 1
+    if bytes_counter == 0:
+        return True
+    return False
