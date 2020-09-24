@@ -26,13 +26,13 @@ def validUTF8(data):
         byte = format(n, '#010b')[-8:]
         if bytes_counter == 0:
             if int(byte[0]) == 1:
-                bytes_counter = byte.count('1')
+                bytes_counter = len(byte.split('0')[0])
             if bytes_counter == 0:
                 continue
             if bytes_counter == 1 or bytes_counter > 4:
                 return False
         else:
-            if byte[:2] != ['10']:
+            if byte[:2] != '10':
                 return False
         bytes_counter -= 1
     if bytes_counter == 0:
