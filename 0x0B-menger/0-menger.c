@@ -11,7 +11,7 @@ void menger(int level)
 {
 	char blk;
 	int size, i, j, row, col;
-	
+
 	size = pow(3, level);
 	for (i = 0; i < size; i++)
 	{
