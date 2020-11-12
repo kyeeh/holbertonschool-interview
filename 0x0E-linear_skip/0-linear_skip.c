@@ -1,4 +1,22 @@
 #include "search.h"
+/**
+  * search_at -  value checker
+  *
+  * @node: is a pointer to the next list to search in
+  * @value: is the value to search for
+  *
+  * Return: pointer to the node with value or NULL
+ */
+skiplist_t *search_at(skiplist_t *node, int value)
+{
+	for (; node; node = node->next)
+	{
+		printf("Value checked at index [%lu] = [%d]\n", node->index, node->n);
+		if (node->n == value)
+			return (node);
+	}
+	return (NULL);
+}
 
 
 /**
@@ -43,25 +61,6 @@ skiplist_t *linear_skip(skiplist_t *list, int value)
 			printf("Value checked at index [%lu] = [%d]\n", node1->index, node1->n);
 		}
 		return (search_at(node1, value));
-	}
-	return (NULL);
-}
-
-/**
-  * search_at -  value checker
-  *
-  * @node: is a pointer to the next list to search in
-  * @value: is the value to search for
-  *
-  * Return: pointer to the node with value or NULL
- */
-skiplist_t *search_at(skiplist_t *node, int value)
-{
-	for (; node; node = node->next)
-	{
-		printf("Value checked at index [%lu] = [%d]\n", node->index, node->n);
-		if (node->n == value)
-			return (node);
 	}
 	return (NULL);
 }
