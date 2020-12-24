@@ -55,7 +55,7 @@ int heap_extract(heap_t **heap)
 	int n, size, btw;
 	heap_t *node, *root;
 
-	if (heap || *heap)
+	if (heap && *heap)
 	{
 		root = *heap;
 		n = root->n;
@@ -68,7 +68,8 @@ int heap_extract(heap_t **heap)
 			return (n);
 		}
 
-		for (btw = 1; btw <= size; btw <<= 1);
+		for (btw = 1; btw <= size; btw <<= 1)
+			;
 		btw >>= 2;
 
 		for (node = root; btw > 0; btw >>= 1)
